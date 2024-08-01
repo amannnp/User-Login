@@ -36,6 +36,12 @@ signUp.addEventListener('click', (event) => {
   event.preventDefault();
   const email = document.getElementById('rEmail').value;
   const password = document.getElementById('rPassword').value;
+  const confirmPassword = document.getElementById("confirmPassword").value
+
+  if (password !== confirmPassword) {
+    alert('Passwords do not match!');
+    return; // Stop the sign-up process
+  }
 
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
@@ -83,10 +89,10 @@ const signIn=document.getElementById('submitSignIn');
     .catch((error)=>{
         const errorCode=error.code;
         if(errorCode==='auth/invalid-credential'){
-            showMessage('Incorrect Email or Password', 'signInMessage');
+            alert('Incorrect Email or Password');
         }
         else{
-            showMessage('Account does not Exist', 'signInMessage');
+            alert('Account does not Exist');
         }
     })
  })
